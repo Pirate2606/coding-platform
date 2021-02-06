@@ -1,0 +1,59 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="container">
+		<form action="/submit" method="post">
+			<br>
+			<div class="input-group mb-3">
+	  			<div class="input-group-prepend">
+	    			<label class="input-group-text" for="inputGroup">Language</label>
+	  			</div>
+	  			<select class="custom-select" id="inputGroup" name = "comp_select">
+					{% if flag %}
+						{% for o in data %}
+							<option value="{{ o.language }}">{{ o.language }}</option>
+						{% endfor %}
+					{% else %}
+						{% for o in data %}
+							{% if o.language == lang %}
+								<option value="{{ o.language }}" selected>{{ o.language }}</option>
+							{% else %}
+								<option value="{{ o.language }}">{{ o.language }}</option>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+
+	  			</select>
+			</div>
+			<br>
+			<hr>
+			{% if output %}
+				<a class = "btn btn-success scroll" href="#out">View Output</a>
+				<br>
+				<hr>
+			{% endif %}
+			<strong class="font-io">Type your code here:</strong>
+			<br><br>
+			<textarea class = "io" name="code" required placeholder="//Enter your code here.">{{code}}</textarea>
+			<br>
+			<hr>
+			<strong class="font-io">Enter your input:</strong>
+			<br><br>
+			<textarea id = "input" name="input" placeholder="//Your Input here.">{{input}}</textarea>
+			<br><br>
+			<input type="checkbox" name="check" id="GFG" value="1" {{check}}> Enable input
+			<br><br>
+			<button class = "btn btn-success" type="submit" >Run Code</button>
+			<br>
+			<hr>
+			<br>
+			<strong class="font-io" id = "out">This is the output : </strong>
+			<br><br>
+			<textarea class = "io" name="output" disabled placeholder="//Your output here.">{{output}}</textarea>
+			<hr>
+		</form>
+		<br><br>
+	</div>
+
+{% endblock %}

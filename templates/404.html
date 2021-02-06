@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br><br>
+<div class="container four-container">
+    <img class="four" src="{{ url_for('static', filename='404_face.png') }}" alt="" height="500px" width="500px">
+    <br><br>
+    <h2 class="four-heading">Page Not Found</h2>
+    <br>
+    <p class="four-text">Sorry, but we can't find the page you are looking for...</p>
+    <br>
+    <a class="btn btn-outline-dark btn-lg" href="{{ url_for('home') }}">Back to home</a>
+    <br><br><br>
+</div>
+
+{% endblock %}

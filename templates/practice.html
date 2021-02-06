@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br>
+<div class="container">
+    {% for item in practice_info.items %}
+        {% if item.problem_diff == "easy" %}
+            <div class="card border-success card-border-size text-center card-back">
+                <div class="card-body">
+                    <h5 class="card-title practice-title">{{ item.problem_title }}</h5>
+                    <p class="card-text text-success practice-text">{{ item.problem_desc }}</p>
+                    <a href="{{ item.problem_link }}" class="btn btn-success">Solve</a>
+                </div>
+                <div class="card-footer text-muted">
+                    {{ item.problem_site }}
+                </div>
+            </div>
+            <br>
+        {% elif item.problem_diff == "medium" %}
+            <div class="card border-warning card-border-size text-center card-back">
+                <div class="card-body">
+                    <h5 class="card-title practice-title">{{ item.problem_title }}</h5>
+                    <p class="card-text text-warning practice-text">{{ item.problem_desc }}</p>
+                    <a href="{{ item.problem_link }}" class="btn btn-warning">Solve</a>
+                </div>
+                <div class="card-footer text-muted">
+                    {{ item.problem_site }}
+                </div>
+            </div>
+            <br>
+        {% else %}
+            <div class="card border-danger card-border-size text-center card-back">
+                <div class="card-body">
+                    <h5 class="card-title practice-title">{{ item.problem_title }}</h5>
+                    <p class="card-text text-danger practice-text">{{ item.problem_desc }}</p>
+                    <a href="{{ item.problem_link }}" class="btn btn-danger">Solve</a>
+                </div>
+                <div class="card-footer text-muted">
+                    {{ item.problem_site }}
+                </div>
+            </div>
+            <br>
+        {% endif %}
+    {% endfor %}
+    <hr>
+    <div class="page-number">
+        {% for page_num in practice_info.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if page_num %}
+                {% if page_num == practice_info.page %}
+                    <a class="btn btn-info btn-lg" href="{{ url_for('practice', page=page_num) }}">{{ page_num }}</a>
+                {% else %}
+                    <a class="btn btn-outline-info btn-lg" href="{{ url_for('practice', page=page_num) }}">{{ page_num }}</a>
+                {% endif %}
+            {% else %}
+                ...
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<br><br><br>
+{% endblock %}

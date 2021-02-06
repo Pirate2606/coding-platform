@@ -1,0 +1,278 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br><br>
+<div class="container-sm">
+    <br>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endif %}
+    {% endwith %}
+</div>
+<div class="container">
+
+    <div class="basic-info">
+        <img class="profile-user-image" src="{{ profile_pic }}" alt="...">
+        <strong class="profile-name">{{ current_user_profile.name }}</strong>
+        <br>
+        <strong class="profile-username">@{{ current_user_profile.username }}</strong>
+    </div>
+
+    <hr>
+
+    <div class="row">
+
+        <div class="col-lg-4">
+            <div class="codechef-block">
+
+                <div class="refresh-heading">
+                    <h3 class="block-heading"><strong>Codechef</strong></h3>
+                </div>
+
+                {% if not codechef_is_connected %}
+
+                    <br>
+                    <h5>Link your codechef profile: </h5>
+                    <br>
+                    <form action="/profile" method="POST">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Codechef: </span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="codechef_username">
+                        </div>
+                        <button class="btn btn-success" type="submit" name="button">Submit</button>
+                    </form>
+                    <br>
+                    <h5>No account yet?</h5>
+                    <span><a href="https://www.codechef.com/signup">Click here</a> to sign up with codechef.</span>
+
+                {% else %}
+
+                    <div class="refresh-button">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#refreshModal" onclick="refreshCodechef()">Refresh <i class="fas fa-redo"></i></button>
+                    </div>
+
+                    <br>
+                    <div class="data">
+                        <table>
+                            <tr>
+                                <td><strong>Name</strong></td>
+                                <td class="data-result-personal">: {{ current_user_profile.codechef_realname }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Username</strong></td>
+                                <td class="data-result-personal">: {{ current_user_profile.codechef_username }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Country</strong></td>
+                                <td class="data-result-personal">: {{ current_user_profile.codechef_country }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rating</strong></td>
+                                <td class="data-result">: {{ current_user_profile.codechef_rating }}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Global rank</strong></td>
+                                <td class="data-result">: {{ current_user_profile.codechef_global_rank }}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Loacl rank</strong></td>
+                                <td class="data-result">: {{ current_user_profile.codechef_local_rank }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+
+                {% endif %}
+            </div>
+        </div>
+
+
+        <div class="col-lg-4">
+            <div class="codechef-block">
+
+                <div class="refresh-heading">
+                    <h3 class="block-heading"><strong>Leetcode</strong></h3>
+                </div>
+
+                {% if not leetcode_is_connected %}
+
+                    <br>
+                    <h5>Link your Leetcode profile</h5>
+                    <br>
+                    <form action="/profile" method="POST">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon2">Leetcode: </span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon2" name="leetcode_username">
+                        </div>
+                        <button class="btn btn-success" type="submit" name="button">Submit</button>
+                    </form>
+                    <br>
+                    <hr>
+                    <h5>No account yet?</h5>
+                    <span><a href="https://leetcode.com/accounts/signup/">Click here</a> to sign up with leetcode.</span>
+
+                {% else %}
+
+                    <div class="refresh-button">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#refreshModal" onclick="refreshLeetcode()">Refresh <i class="fas fa-redo"></i></button>
+                    </div>
+
+                    <br>
+                    <div class="data">
+                        <table>
+                            <tr>
+                                <td><strong>Name</strong></td>
+                                <td class="data-result-personal">: {{ current_user_profile.leetcode_realname }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Userame</strong></td>
+                                <td class="data-result-personal">: {{ current_user_profile.leetcode_username }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Global Rank</strong></td>
+                                <td class="data-result">: {{ current_user_profile.leetcode_global_rank }}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Contest finished</strong></td>
+                                <td class="data-result">: {{ current_user_profile.leetcode_contest_finished }}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Contest rating</strong></td>
+                                <td class="data-result">: {{ current_user_profile.leetcode_contest_rating }}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Solved questions</strong></td>
+                                <td class="data-result">: {{ current_user_profile.leetcode_solved_questions }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                {% endif %}
+            </div>
+        </div>
+
+
+        <div class="col-lg-4">
+            <div class="codechef-block">
+                <div class="refresh-heading">
+                    <h3 class="block-heading"><strong>Hackerearth</strong></h3>
+                </div>
+
+                {% if not hackerearth_is_connected %}
+                    <br>
+                    <h5>Link your Hackerearth profile</h5>
+                    <br>
+                    <form action="/profile" method="POST">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3">Hackerearth: </span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon3" name="hackerearth_username">
+                        </div>
+                        <button class="btn btn-success" type="submit" name="button">Submit</button>
+                    </form>
+                    <br>
+                    <h5>No account yet?</h5>
+                    <span><a href="https://www.hackerearth.com/">Click here</a> to sign up with Hackerearth.</span>
+
+                {% else %}
+
+                    <div class="refresh-button">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#refreshModal" onclick="refreshHackerearth()">Refresh <i class="fas fa-redo"></i></button>
+                    </div>
+
+                    <br>
+                    <div class="data">
+                        <table>
+                            <tr>
+                                <td><strong>Name</strong></td>
+                                <td class="data-result-personal">: {{ current_user_profile.hackerearth_realname }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Username</strong></td>
+                                <td class="data-result-personal">: {{ current_user_profile.hackerearth_username }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rating</strong></td>
+                                <td class="data-result">: {{ current_user_profile.hackerearth_rating }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="refreshModal" tabindex="-1" role="dialog" aria-labelledby="refreshModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="refreshModalLabel">Refreshing</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Reload the page after 4-5 minutes to see refreshed profile, why waste time? Let's do some practice!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">I am already a PRO!</button>
+        <a href="{{ url_for('practice') }}" class="btn btn-primary">Practice</a>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br><br><br>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+
+    function refreshCodechef() {
+        $.getJSON('/refresh_codechef',
+            function(data) {
+        });
+        return false;
+    };
+    function refreshLeetcode() {
+        $.getJSON('/refresh_leetcode',
+            function(data) {
+        });
+        return false;
+    };
+    function refreshHackerearth() {
+        $.getJSON('/refresh_hackerearth',
+            function(data) {
+        });
+        return false;
+    };
+</script>
+{% endblock %}

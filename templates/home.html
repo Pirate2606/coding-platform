@@ -1,0 +1,129 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="modal fade" id="getName" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="getNameLabel" aria-hidden="true">
+  <div class="modal-dialog">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title" id="getNameLabel">Welcome!</h5>
+	  </div>
+	  <div class="modal-body">
+          <form action="/" method="POST">
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="fullName">Full name: </span>
+                </div>
+                <input type="text" class="form-control" name="user_name" aria-label="Sizing example input" aria-describedby="fullName">
+              </div>
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">Username: </span>
+                  </div>
+                  <input type="text" disabled class="form-control" placeholder="@{{ current_user_profile.username }}" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <div class="modal-footer">
+                  <button type="submit" name="button" class="btn btn-primary">Submit</button>
+              </div>
+          </form>
+	  </div>
+	</div>
+  </div>
+</div>
+
+	<div class="container-sm">
+		<br>
+		{% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+        {% endwith %}
+	</div>
+
+	<div class="landing jumbotron align jumbo-height">
+		<h2 class="large"><strong>Welcome to the coding platform</strong></h2>
+		<br>
+		<h3 class="less_large">Ready.To.Code</h3>
+		<br>
+		{% if not current_user.is_authenticated %}
+			<a class="btn btn-success btn-lg" href="{{ url_for('google.login') }}">Get Started</a>
+		{% else %}
+			{% if current_user_profile.name == None %}
+				<script type="text/javascript">
+					$( document ).ready(function() {
+						if (document.cookie.indexOf('visited=true') == -1){
+    						$('#getName').modal({show:true});
+    						var expires = new Date((new Date()).valueOf());
+    						document.cookie = "visited=true;expires=" + expires.toUTCString();
+						}
+					});
+				</script>
+			{% endif %}
+
+			<a class="btn btn-success btn-lg" href="{{ url_for('practice') }}">Get Started</a>
+		{% endif %}
+	</div>
+
+  	<div class="container" id="about">
+		<div class="jumbotron">
+			<div class="lg:w-4/6 mx-auto">
+	      		<div class="rounded-lg overflow-hidden">
+	        		<img alt="content" class="object-cover object-center h-full w-full" src="{{ url_for('static', filename='about.jpg') }}">
+	      		</div>
+		      	<div class="flex flex-col sm:flex-row mt-10">
+		        	<div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
+		          		<div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
+								<img class = "radius" src="{{ url_for('static', filename='profile.jpg') }}" alt="">
+		          		</div>
+		          		<div class="flex flex-col items-center text-center justify-center font-primary">
+		            		<h2 class="font-medium title-font mt-4 text-gray-900 text-lg">Aditya Naitan</h2>
+		            		<div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4"></div>
+		            		<p class="text-base text-gray-600">Shimla, HP, India</p>
+		          		</div>
+		        	</div>
+		        	<div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-300 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left font-secondary">
+						<p class="leading-relaxed text-lg mb-4">I am currently in the 3rd year of my Bachelor in Technology Degree from University Institute of Information Technology, Shimla, in Computer Science Engineering. I have been tinkering with code since my first year. I love working on Web Apps, as well as tools and technologies related to Web Apps and I have spent many of my nights up on such projects.</p>
+						<a href="https://twitter.com/aditya_naitan"><i class="twitter-logo fa fa-twitter fa-2x"></i></a>
+						<a href="https://www.linkedin.com/in/aditya-naitan-67ba4917a/"><i class="linkedin-logo fab fa-linkedin-in fa-2x"></i></a>
+		        	</div>
+		      	</div>
+	    	</div>
+		</div>
+  	</div>
+
+	<hr><br>
+	<div class="relative" id = "contact">
+	  	<div class="absolute inset-0 bg-gray-300">
+	    	<iframe style="filter: contrast(1.2) opacity(0.4);" marginheight="0" marginwidth="0" title="map" scrolling="no" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=Sector+2,+New+Shimla&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" width="100%" height="100%" frameborder="0"></iframe>
+	  	</div>
+	  	<div class="container px-4 py-24 mx-auto flex">
+	    	<div class="font-feedback lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative">
+	      		<h2><strong>Feedback</strong></h2>
+				<hr>
+	      		<p>Please give your feedback here</p>
+				<form action="/" method="POST">
+					{{ form.hidden_tag() }}
+					{{ form.email(class="form-control mb-4" ,placeholder="Email") }}
+					<ul>
+	                    {% for error in form.email.errors %}
+	                    	<li style="color: red;">{{ error }}</li>
+	                    {% endfor %}
+	                </ul>
+					{{ form.message(class="form-control mb-4" ,placeholder="Message") }}
+					{{ form.submit(class="btn btn-success") }}
+				</form>
+	      	</div>
+	  	</div>
+	</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,263 @@
+
+body {
+    background-color: white;
+}
+
+/* navbar */
+.navbar-links {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    margin-left: 10px;
+    font-size: 25px;
+    text-align: center;
+}
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,102,203, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.custom-toggler.navbar-toggler {
+  border-color: rgb(255,102,203);
+}
+
+.radius {
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+}
+
+#logo {
+    margin-left: 70px;
+    margin-right: 50px;
+    max-height: 65px;
+    max-width: 65px;
+}
+
+.login-btn {
+    margin-right: 70px;
+    margin-left: 70px;
+}
+
+.profile-pic {
+    margin: auto;
+}
+
+
+/* home - landing page */
+.landing {
+    background-image: url("https://hrcdn.net/patterns/coffee.png");
+    background-size: cover;
+}
+
+.align {
+    color : white;
+    text-align: center;
+}
+
+.large {
+    font-size: 45px;
+    padding-top: 80px;
+    font-family: 'Montserrat Subrayada', sans-serif;
+}
+
+.less_large {
+    font-size: 30px;
+    font-family: 'Lobster', cursive;
+}
+
+.jumbo-height {
+    height: 650px;
+}
+
+
+/*FOOTER */
+.footer {
+    text-align: center;
+    margin: auto;
+    font-size: 15px;
+    color: white;
+}
+
+.font-feedback {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+/* About */
+.twitter-logo {
+    color: #1DA1F2;
+    padding-right: 5px;
+}
+
+.linkedin-logo {
+    color: #005F91;
+    padding-left: 5px;
+}
+
+.about-back {
+    background-image: url("../about_back.jpg");
+}
+
+.font-primary {
+    font-family: 'Source Code Pro', monospace;
+}
+
+
+
+/* compiler */
+.font-io {
+    font-family: 'Aldrich', sans-serif;
+    font-size: 30px;
+}
+
+.io {
+    font-family: 'PT Sans', sans-serif;
+    float = left;
+    background-color: #1C2434;
+    height: 600px;
+    width: 100%;
+    font-size: 22px;
+    color: #5EAFE9;
+}
+
+#input {
+    font-family: 'PT Sans', sans-serif;
+    background-color: #1C2434;
+    height: 300px;
+    font-size: 18px;
+    color: #5EAFE9;
+}
+
+
+/* Contest */
+
+.contest-name {
+    font-size: 23px;
+    color: #D93240;
+}
+
+.contest-text {
+    font-size: 20px;
+    color: #8C8579;
+    padding-top: 3px;
+}
+
+.contest-heading {
+    font-family: 'Aldrich', sans-serif;
+    font-size: 30px;
+    color: #590515;
+}
+
+.contest-button {
+    width: 148px;
+}
+
+
+
+
+/* PRACTICE */
+
+.card-back {
+    background: #C9CCD3;
+    background-image: linear-gradient(-180deg, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%);
+    background-blend-mode: lighten;
+}
+
+.card-border-size {
+    border-width: thick;
+}
+
+.practice-title {
+    font-family: 'Aldrich', sans-serif;
+    font-size: 25px;
+    color: #590515;
+}
+
+.practice-text {
+    font-size: 20px;
+}
+
+.page-number {
+    text-align: center;
+}
+
+
+
+/* 404 Page */
+
+.four {
+    margin: auto;
+}
+
+.four-heading {
+    font-size: 40px;
+}
+
+.four-text {
+    font-size: 30px;
+}
+
+.four-container {
+    text-align: center;
+}
+
+/* PROFILE PAGE */
+
+.profile-user-image {
+    margin: auto;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: 100px;
+    width: 100px;
+}
+
+.profile-name {
+    font-size: 35px;
+}
+
+.profile-username {
+    font-size: 20px;
+}
+
+.codechef-block {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(0,0,0,0.3));
+    margin-top: 20px;
+    border: 3px black solid;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.basic-info {
+    text-align: center;
+}
+
+.data {
+    font-size: 20px;
+}
+
+.block-heading {
+    font-size: 40px;
+}
+
+.refresh-heading {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.refresh-button {
+    text-align: center;
+}
+.data-result {
+    background-color: #5CB85C;
+    font-size: 20px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.data-result-personal {
+    font-size: 20px;
+}
+
+table {
+    width: 320px;
+}

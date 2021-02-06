@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br><hr><br>
+<div class="container">
+    <h3 class="contest-heading"><u>Active Contests:</u></h3>
+    <br>
+    {% for item in active_contests %}
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb contest-back">
+                <li class="breadcrumb-item contest-name col-sm" aria-current="page">{{ item.contest_name }}</li>
+                <li class="col-sm" aria-current="page">
+                    <button class="btn btn-outline-info contest-button" type="button" data-toggle="collapse" data-target="#{{ item.timing_id }}" aria-expanded="false" aria-controls="{{ item.timing_id }}">
+                            Info
+                    </button>
+                    <div class="collapse" id="{{ item.timing_id }}">
+                        <div class="card card-body">
+                            Start - {{ item.start }}
+                            <br>
+                            End - {{ item.end }}
+                        </div>
+                    </div>
+                </li>
+                <li class="col-sm"><a href="{{ item.contest_link }}" class="btn btn-outline-success contest-button">Enter</a></li>
+            </ol>
+        </nav>
+    {% endfor %}
+
+    <hr>
+    <h3 class="contest-heading"><u>Future contests:</u></h3>
+    <br>
+
+    {% for future in future_contests %}
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb contest-back">
+                <li class="breadcrumb-item contest-name col-sm" aria-current="page">{{ future.contest_name }}</li>
+                <li class="col-sm" aria-current="page">
+                    <button class="btn btn-outline-info contest-button" type="button" data-toggle="collapse" data-target="#{{ future.timing_id }}" aria-expanded="false" aria-controls="{{ future.timing_id }}">
+                            Info
+                    </button>
+                    <div class="collapse" id="{{ future.timing_id }}">
+                        <div class="card card-body">
+                            Start - {{ future.start }}
+                            <br>
+                            End - {{ future.end }}
+                        </div>
+                    </div>
+                </li>
+                <li class="align-items-left col-sm"><a href="{{ future.contest_link }}" class="btn btn-outline-success contest-button">Enter</a></li>
+            </ol>
+        </nav>
+    {% endfor %}
+
+
+    <hr>
+    <h3 class="contest-heading"><u>Past Contests:</u></h3>
+    <br>
+    {% for obj in in_active_contests %}
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb contest-back">
+                <li class="breadcrumb-item col-sm contest-name" aria-current="page">{{ obj.contest_name }}</li>
+                <li class="contest-text col-sm" aria-current="page">Event ended</li>
+                <li class="col-sm"><a href="{{ obj.contest_link }}" class="btn btn-outline-success contest-button">View</a></li>
+            </ol>
+        </nav>
+    {% endfor %}
+</div>
+<br><br><br>
+{% endblock %}
