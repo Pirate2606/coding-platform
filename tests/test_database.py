@@ -10,6 +10,9 @@ from app import app
 class BasicTests(unittest.TestCase):
 
     def setUp(self):
+        app.config["TESTING"] = True
+        app.config["DEBUG"] = False
+        self.assertFalse(app.config["DEBUG"])
         with app.app_context():
             db.drop_all()
             db.create_all()

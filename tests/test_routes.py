@@ -8,6 +8,11 @@ from app import app
 
 class BasicTests(unittest.TestCase):
 
+    def setUp(self):
+        app.config["TESTING"] = True
+        app.config["DEBUG"] = False
+        self.assertFalse(app.config["DEBUG"])
+
     def test_main_page(self):
         tester = app.test_client(self)
         response = tester.get('/')

@@ -9,6 +9,11 @@ from app import get_dateTime, createFile, complier_output, app
 
 class BasicTests(unittest.TestCase):
 
+    def setUp(self):
+        app.config["TESTING"] = True
+        app.config["DEBUG"] = False
+        self.assertFalse(app.config["DEBUG"])
+
     def test_datetime(self):
         dateTime = ["30 Mar 2020", "00:00:00"]
         result = get_dateTime(dateTime)
